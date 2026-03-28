@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/libpairipcore-guide/"
+title = "Guia libpairipcore"
+version = "1.0.0"
+id = "artifacts/libpairipcore-guide"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/libpairipcore-guide/" ]
+localPort = 23966
+
+[services.development]
+run = "pnpm --filter @workspace/libpairipcore-guide run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/libpairipcore-guide", "run", "build" ]
+publicDir = "artifacts/libpairipcore-guide/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23966"
+BASE_PATH = "/libpairipcore-guide/"
